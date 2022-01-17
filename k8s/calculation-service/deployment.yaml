@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calculation-deployment
+  labels:
+    app: calculation
+spec:
+  selector:
+    matchLabels:
+      app: calculation
+  template:
+    metadata:
+      labels:
+        app: calculation
+    spec:
+      containers:
+      - name: calculation-service
+        image: calculation-service:test
+        ports:
+        - containerPort: 8080
+        env:
+        - name: APP_RATES_PROVIDER_BASE_URL
+          value: http://rate-provider
+        - name: SERVER_SERVLET_CONTEXT_PATH
+          value: /calculation

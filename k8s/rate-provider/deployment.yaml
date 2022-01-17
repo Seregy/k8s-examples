@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rate-provider-deployment
+  labels:
+    app: rate-provider
+spec:
+  selector:
+    matchLabels:
+      app: rate-provider
+  template:
+    metadata:
+      labels:
+        app: rate-provider
+    spec:
+      containers:
+      - name: rate-provider-service
+        image: rate-service:mock
+        ports:
+        - containerPort: 80
