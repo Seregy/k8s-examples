@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: rate-provider-service
-        image: rate-service:mock
+        image: seregy/rate-service:0.0.1-mock
         ports:
         - containerPort: 80
