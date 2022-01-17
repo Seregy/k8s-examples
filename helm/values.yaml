@@ -21,7 +21,6 @@ calculation_service:
     APP_RATES_PROVIDER_BASE_URL: http://{{ include "k8s-examples.fullname" . }}-rates
     SERVER_SERVLET_CONTEXT_PATH: /calculation
   ingress:
-    host: fin.info
     http:
       path: /calculation
       type: Prefix
