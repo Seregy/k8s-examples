@@ -1,0 +1,6 @@
+server:
+  port: 8080
+
+app:
+  rates-provider:
+    base-url: http://localhost:8090
