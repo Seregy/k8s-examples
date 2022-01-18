@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "k8s-examples.fullname" . }}-calculation
+spec:
+  type: {{ .Values.calculation_service.service.type }}
+  selector:
+    app: calculation
+  ports:
+    - protocol: TCP
+      port: {{ .Values.calculation_service.service.port }}

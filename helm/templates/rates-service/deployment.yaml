@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "k8s-examples.fullname" . }}-rates
+  labels:
+    app: rates
+spec:
+  replicas: {{ .Values.rates_service.replicas }}
+  selector:
+    matchLabels:
+      app: rates
+  template:
+    metadata:
+      labels:
+        app: rates
+    spec:
+      containers:
+      - name: rates
+        image: "{{ .Values.rates_service.image.name }}:{{ .Values.rates_service.image.tag }}"
+        ports:
+          - containerPort: {{ .Values.rates_service.image.container_port }}

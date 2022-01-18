@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "k8s-examples.fullname" . }}-calculation
+  labels:
+    app: calculation
+spec:
+  replicas: {{ .Values.calculation_service.replicas }}
+  selector:
+    matchLabels:
+      app: calculation
+  template:
+    metadata:
+      labels:
+        app: calculation
+    spec:
+      containers:
+        - name: calculation
+          image: "{{ .Values.calculation_service.image.name }}:{{ .Values.calculation_service.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.calculation_service.image.container_port }}
+          env:
+        {{- range $name, $value := .Values.calculation_service.env }}
+        {{- if not (empty $value) }}
+          - name: {{ $name | quote }}
+            value: {{ tpl (toString $value) $ | quote }}
+        {{- end }}
+        {{- end }}

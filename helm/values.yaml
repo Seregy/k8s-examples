@@ -1,0 +1,27 @@
+rates_service:
+  replicas: 1
+  image:
+    name: serhii/rates-service
+    tag: 0.0.1
+    container_port: 80
+  service:
+    type: ClusterIP
+    port: 80
+
+calculation_service:
+  replicas: 1
+  image:
+    name: serhii/calculation-service
+    tag: 0.0.1
+    container_port: 80
+  service:
+    type: ClusterIP
+    port: 8080
+  env:
+    APP_RATES_PROVIDER_BASE_URL: http://{{ include "k8s-examples.fullname" . }}-rates
+    SERVER_SERVLET_CONTEXT_PATH: /calculation
+  ingress:
+    http:
+      path: /calculation
+      type: Prefix
+      servicePort: 8080

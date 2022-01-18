@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "k8s-examples.fullname" . }}-calculation
+spec:
+  rules:
+  - http:
+      paths:
+      - path: {{ .Values.calculation_service.ingress.http.path }}
+        pathType: {{ .Values.calculation_service.ingress.http.type }}
+        backend:
+          service:
+            name: {{ include "k8s-examples.fullname" . }}-calculation
+            port:
+              number: {{ .Values.calculation_service.ingress.http.servicePort }}
