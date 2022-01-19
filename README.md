@@ -24,15 +24,15 @@ Provided configurations for deployment resources make use of already built image
     ```
     ./mvnw clean verify
     
-    docker build -t calculation-service .
+    docker build -t calculation-service:0.0.1 .
     ```
 
-   To build the Java application from sources and create a Docker image with `calculation-service` tag
+   To build the Java application from sources and create a Docker image with `calculation-service:0.0.1` tag
 
-2. Building [rate-service](rate-service-mock) image by switching into the service directory and creating a Docker image with `rate-service` tag:
+2. Building [rate-service](rate-service-mock) image by switching into the service directory and creating a Docker image with `rate-service:0.0.1` tag:
 
     ```
-    docker build -t rate-service .
+    docker build -t rate-service:0.0.1 .
     ```
 
 ### Deploying services locally via Minikube
@@ -51,8 +51,8 @@ Provided configurations for deployment resources make use of already built image
     ```
 
 3. (Optional) Adjust the deployments to use locally built images by:
-    - replacing existing value for `image:` in [calculation-service deployment file](k8s/calculation-service/deployment.yaml) with `image: calculation-service`
-    - replacing existing value for `image:` in [rate-provider deployment file](k8s/rate-provider/deployment.yaml) with `image: rate-service`
+    - replacing existing value for `image:` in [calculation-service deployment file](k8s/calculation-service/deployment.yaml) with `image: calculation-service:0.0.1`
+    - replacing existing value for `image:` in [rate-provider deployment file](k8s/rate-provider/deployment.yaml) with `image: rate-service:0.0.1`
 4. Create deployment, service and ingress resources for calculation service:
 
     ```
