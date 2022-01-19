@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: calculation-service
-        image: calculation-service:0.0.1
+        image: seregy/calculation-service:0.0.1
         ports:
         - containerPort: 8080
         env:
